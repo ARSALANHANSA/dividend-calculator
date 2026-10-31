@@ -10,7 +10,7 @@ import "./globals.css";
 // next/font self-hosts these files at build time; no request goes to Google at runtime.
 const newsreader = Newsreader({
   subsets: ["latin"],
-  weight: ["500"],
+  weight: ["500", "700"],
   variable: "--font-newsreader",
   display: "swap",
   // Next 14 has no fallback metrics for Newsreader; the CSS stack falls back to Georgia.

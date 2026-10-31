@@ -58,7 +58,7 @@ export default function HomePage() {
 
       <section className="border-b border-line bg-surface">
         <div className="container-page pb-6 pt-10 sm:pt-12">
-          <h1 className="font-display text-3xl font-medium leading-tight text-ink sm:text-4xl">Dividend Calculator</h1>
+          <h1 className="font-display text-3xl font-bold leading-tight text-ink sm:text-4xl">Dividend Calculator</h1>
           <p className="mt-3 max-w-2xl text-lg leading-relaxed text-muted">
             Estimate your future dividend income, the effect of reinvesting dividends, and how your portfolio could grow
             over time. Enter your own numbers below.
