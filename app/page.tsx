@@ -1,99 +1,241 @@
-import DividendCalculator from "@/components/DividendCalculator";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import DividendCalculator from "@/components/calculator/DividendCalculator";
+import FaqList from "@/components/FaqList";
+import JsonLd from "@/components/JsonLd";
+import { guides } from "@/data/guides";
+import { homeFaqs } from "@/data/faqs";
+import { buildMetadata, publisherJsonLd } from "@/lib/seo";
+import { siteConfig } from "@/lib/site-config";
 
-export default function Home() {
+export const metadata = buildMetadata({
+  title: "Dividend Calculator: Estimate Dividend Income & DRIP Growth",
+  description:
+    "Free dividend calculator. Estimate annual and monthly dividend income, DRIP reinvestment growth, total dividends, and yield on cost, with a year-by-year breakdown.",
+  path: "/",
+  absoluteTitle: true,
+});
+
+const appJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: siteConfig.name,
+  url: siteConfig.url,
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any (web browser)",
+  browserRequirements: "Requires JavaScript",
+  isAccessibleForFree: true,
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  description:
+    "Browser-based calculator that projects dividend income, dividend reinvestment (DRIP), dividend growth, contributions, and taxes over time.",
+  publisher: publisherJsonLd,
+};
+
+const inputGuide = [
+  ["Initial investment or shares", "The current value of your position, or the number of shares you own. Your brokerage statement shows both."],
+  ["Share price", "Today's price per share, from your brokerage or any market quote."],
+  ["Dividend yield or dividend per share", "Listed on your brokerage's holding page or the company's investor relations dividend history."],
+  ["Payout frequency", "How many regular payments are made each year. Check the dividend history."],
+  ["Dividend growth rate", "Your estimate of how fast the dividend will rise. A long-term historical average is a common starting point."],
+  ["Share price growth", "Your estimate of yearly price change. Use 0% to isolate dividend effects."],
+  ["Contributions", "Money you plan to add each month or year."],
+  ["Tax rate", "An approximate rate on dividends. Use 0% for tax-advantaged accounts."],
+] as const;
+
+const resultGuide = [
+  ["Annual dividend income", "Dividends received in the final year of the period, after any tax rate you entered."],
+  ["Monthly and quarterly income", "The final year's income divided by 12 and by 4. These are averages, whatever the actual payout schedule."],
+  ["Total dividends earned", "The sum of every payment over the whole period. Shown before and after tax when a tax rate is entered."],
+  ["Ending total value", "Shares owned at the end × projected share price, plus any dividends kept as cash when DRIP is off."],
+  ["Ending shares", "Your starting shares plus shares bought with contributions and, if DRIP is on, reinvested dividends."],
+  ["Yield on cost", "Final-year dividends (before tax) ÷ total money you contributed. It shows income relative to what you actually put in."],
+] as const;
+
+export default function HomePage() {
   return (
-    <main className="min-h-screen bg-paper">
-      {/* Hero */}
-      <header className="border-b border-line">
-        <div className="mx-auto max-w-5xl px-6 pt-16 pb-12 sm:px-8">
-          <p className="font-mono text-xs tracking-wide text-pine mb-4">
-            No. 001 — Income Projection Tools
-          </p>
-          <h1 className="font-display text-4xl sm:text-5xl leading-tight text-ink max-w-2xl">
-            See what your dividends could grow into.
-          </h1>
-          <p className="mt-5 max-w-xl text-ink/70 leading-relaxed">
-            Enter what you hold today, and this calculator projects your dividend
-            income and portfolio value forward — with or without reinvestment,
-            year by year.
+    <>
+      <JsonLd data={appJsonLd} />
+
+      <section className="border-b border-line bg-surface">
+        <div className="container-page pb-6 pt-10 sm:pt-12">
+          <h1 className="font-display text-3xl font-medium leading-tight text-ink sm:text-4xl">Dividend Calculator</h1>
+          <p className="mt-3 max-w-2xl text-lg leading-relaxed text-muted">
+            Estimate your future dividend income, the effect of reinvesting dividends, and how your portfolio could grow
+            over time. Enter your own numbers below.
           </p>
         </div>
-      </header>
+      </section>
 
-      {/* Calculator */}
-      <section className="mx-auto max-w-5xl px-6 py-12 sm:px-8">
+      <section className="container-page py-8" aria-label="Calculator">
         <DividendCalculator />
       </section>
 
-      {/* Explainer */}
-      <section className="border-t border-line bg-white/40">
-        <div className="mx-auto max-w-3xl px-6 py-16 sm:px-8">
-          <h2 className="font-display text-3xl text-ink mb-6">
-            How the dividend calculator works
-          </h2>
-          <div className="space-y-4 text-ink/80 leading-relaxed">
-            <p>
-              A dividend calculator projects how a stock or portfolio&apos;s dividend
-              income and total value could change over time, based on a few
-              assumptions you control: how much you start with, the current
-              dividend yield, how fast that dividend tends to grow each year,
-              and whether you reinvest the payouts instead of taking them as
-              cash.
-            </p>
-            <p>
-              Each year, the tool calculates the dividend paid on your balance,
-              adds it back into your holdings if reinvestment is switched on,
-              adds any new contribution you&apos;ve entered, and then grows the
-              balance by your expected share price appreciation rate. The
-              dividend yield itself increases each year by your chosen growth
-              rate, reflecting a company raising its payout over time.
-            </p>
-            <p>
-              The result is a year-by-year statement showing your starting
-              balance, the dividend earned, your contribution, and your ending
-              balance — so you can see exactly how compounding and
-              reinvestment build up over the years you enter.
-            </p>
-          </div>
+      <div className="container-page">
+        <article className="prose-content mx-auto mt-10">
+          <h2>What this dividend calculator does</h2>
+          <p>
+            This tool projects how a dividend-paying investment could produce income and grow over a period you choose.
+            It starts with what you own today, applies the dividend yield, dividend growth, share price growth, and
+            contributions you enter, and shows the result year by year.
+          </p>
+          <p>
+            It works as a dividend income calculator, a dividend yield calculator, and a DRIP calculator in one: switch
+            dividend reinvestment on or off and the results show both outcomes side by side. Everything runs in your
+            browser. Your numbers aren&apos;t sent anywhere or saved, and you don&apos;t need an account.
+          </p>
 
-          <h2 className="font-display text-3xl text-ink mt-14 mb-6">
-            Frequently asked questions
-          </h2>
-          <div className="divide-y divide-line">
-            <Faq
-              q="What is dividend reinvestment (DRIP)?"
-              a="Dividend reinvestment means using the cash dividend you receive to buy more shares of the same stock, automatically, instead of withdrawing it. Over many years, this compounds because each reinvested dividend then earns its own dividend."
-            />
-            <Faq
-              q="What dividend growth rate should I use?"
-              a="A common starting point is the company's average annual dividend increase over the past 5–10 years, which you can find in its dividend history or investor relations page. Using a conservative rate gives a more realistic projection than assuming growth continues at a recent high rate."
-            />
-            <Faq
-              q="Does this calculator account for taxes?"
-              a="No. This tool projects gross dividend income and portfolio value before any dividend or capital gains tax. Tax treatment varies by country, account type, and individual circumstances, so actual after-tax returns will be lower."
-            />
-            <Faq
-              q="Is this financial advice?"
-              a="No. This calculator is an educational estimation tool based on the assumptions you enter. It does not account for dividend cuts, market volatility, or company-specific risk, and should not be the sole basis for an investment decision."
-            />
-          </div>
+          <h2>How to use the calculator</h2>
+          <ol>
+            <li>Enter your holding as a dollar amount or a number of shares, plus the current share price.</li>
+            <li>Enter the dividend as a yield (%) or as an annual dividend per share ($), and choose how often it&apos;s paid.</li>
+            <li>Add your growth assumptions for the dividend and the share price. Leave them at 0% to keep things constant.</li>
+            <li>Optionally add regular contributions and a dividend tax rate.</li>
+            <li>Choose how many years to project and whether to reinvest dividends.</li>
+            <li>
+              Press <strong>Calculate dividends</strong>. Edit any value and calculate again to compare scenarios, or press{" "}
+              <strong>Reset</strong> to return to the example values.
+            </li>
+          </ol>
+
+          <h2>Inputs you need and where to find them</h2>
+        </article>
+
+        <div className="mx-auto mt-2 max-w-prose overflow-hidden rounded-xl border border-line bg-surface">
+          <dl className="divide-y divide-line">
+            {inputGuide.map(([term, detail]) => (
+              <div key={term} className="grid gap-1 px-5 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt className="text-sm font-medium text-ink">{term}</dt>
+                <dd className="text-sm leading-relaxed text-muted sm:col-span-2">{detail}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
-      </section>
 
-      <footer className="border-t border-line">
-        <div className="mx-auto max-w-5xl px-6 py-8 sm:px-8 text-xs text-ink/50">
-          For educational purposes only. Not financial advice.
+        <article className="prose-content mx-auto">
+          <h2>How dividend income and reinvestment are calculated</h2>
+          <p>The calculator simulates every month of the period using these formulas:</p>
+        </article>
+
+        <div className="mx-auto mt-2 max-w-prose space-y-2 rounded-xl border border-line bg-surface p-5 text-sm leading-relaxed">
+          <p><strong>Dividend per share from yield:</strong> annual dividend per share = yield × share price</p>
+          <p><strong>Dividend per share in year n:</strong> starting dividend × (1 + dividend growth)<sup>n − 1</sup></p>
+          <p><strong>Each payment:</strong> shares owned × annual dividend per share ÷ payments per year</p>
+          <p><strong>After tax:</strong> net payment = payment × (1 − tax rate)</p>
+          <p><strong>DRIP:</strong> new shares = net payment ÷ that month&apos;s share price</p>
+          <p><strong>Share price:</strong> grows by (1 + price growth)<sup>1/12</sup> each month, compounding to the annual rate</p>
+          <p><strong>Contributions:</strong> buy shares at the end of each month or year, after that month&apos;s dividend</p>
         </div>
-      </footer>
-    </main>
-  );
-}
 
-function Faq({ q, a }: { q: string; a: string }) {
-  return (
-    <div className="py-5">
-      <h3 className="font-display text-lg text-ink mb-1.5">{q}</h3>
-      <p className="text-sm text-ink/70 leading-relaxed">{a}</p>
-    </div>
+        <article className="prose-content mx-auto">
+          <p>
+            For example, 100 shares at $50 paying $2.00 a year (a 4% yield) once a year produce a $200 payment. With
+            DRIP, that buys 4 more shares, so next year&apos;s payment is 104 × $2.00 = $208. That growing payment is
+            the compounding effect. The <Link href="/dividend-guides/dividend-reinvestment-drip">DRIP guide</Link>{" "}
+            walks through it in more detail.
+          </p>
+
+          <h2>What each result means</h2>
+        </article>
+
+        <div className="mx-auto mt-2 max-w-prose overflow-hidden rounded-xl border border-line bg-surface">
+          <dl className="divide-y divide-line">
+            {resultGuide.map(([term, detail]) => (
+              <div key={term} className="grid gap-1 px-5 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt className="text-sm font-medium text-ink">{term}</dt>
+                <dd className="text-sm leading-relaxed text-muted sm:col-span-2">{detail}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <article className="prose-content mx-auto">
+          <h2>Factors that can change your dividend income</h2>
+          <ul>
+            <li>
+              <strong>Dividend cuts and suspensions.</strong> Companies can reduce or stop dividends at any time,
+              especially when earnings fall. A high <Link href="/dividend-guides/payout-ratio">payout ratio</Link> leaves
+              less room for error.
+            </li>
+            <li>
+              <strong>Share price changes.</strong> Reinvested dividends buy fewer shares when prices are high and more
+              when they are low, and the value of your holding moves with the market.
+            </li>
+            <li>
+              <strong>Taxes.</strong> In a taxable account, dividends, including reinvested ones, are generally taxed
+              each year. See <Link href="/dividend-guides/dividend-taxes">how dividends are taxed</Link>.
+            </li>
+            <li>
+              <strong>Fees.</strong> Fund expense ratios and any plan or trading fees reduce returns. The calculator
+              doesn&apos;t deduct fees, so reduce your growth assumptions to account for them.
+            </li>
+            <li>
+              <strong>Payout frequency.</strong> More frequent payments compound slightly faster with DRIP and change the
+              size of each payment. See <Link href="/dividend-guides/payout-frequency">payout frequency</Link>.
+            </li>
+          </ul>
+
+          <h2>Limitations of dividend projections</h2>
+          <p>
+            Every projection here assumes constant rates: the same dividend growth, price growth, and tax rate every year.
+            Real markets don&apos;t behave that way. The calculator also doesn&apos;t model fees, inflation, specific
+            payment dates, cash interest, capital gains taxes when you sell, or the timing differences between the
+            ex-dividend date and payment date.
+          </p>
+          <p>
+            Results are rounded for display, and small changes in assumptions can produce large differences over long
+            periods. Use the calculator to compare scenarios and understand how the pieces interact, not to predict what
+            will actually happen. It does not provide investment, financial, or tax advice. See the full{" "}
+            <Link href="/disclaimer">disclaimer</Link>.
+          </p>
+
+          <h2>Frequently asked questions</h2>
+        </article>
+
+        <div className="mx-auto mt-2 max-w-prose">
+          <FaqList faqs={homeFaqs} />
+          <p className="mt-3 text-sm text-muted">
+            More answers on the <Link href="/faq" className="link">FAQ page</Link>.
+          </p>
+        </div>
+
+        <section className="mx-auto mt-16 max-w-4xl" aria-labelledby="guides-heading">
+          <h2 id="guides-heading" className="text-center font-display text-2xl font-medium text-ink sm:text-3xl">
+            Dividend guides
+          </h2>
+          <p className="mx-auto mt-2 max-w-xl text-center text-muted">
+            Plain-English explanations of the concepts behind each calculator input.
+          </p>
+          <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+            {guides.map((guide) => (
+              <li key={guide.slug}>
+                <Link
+                  href={`/dividend-guides/${guide.slug}`}
+                  className="card group flex h-full flex-col p-5 transition-colors hover:border-accent/40"
+                >
+                  <span className="font-medium text-ink group-hover:text-accent">{guide.shortTitle}</span>
+                  <span className="mt-1 text-sm leading-relaxed text-muted">{guide.summary}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <article className="prose-content mx-auto">
+          <h2>Next steps</h2>
+          <p>
+            Try a few versions of your own scenario: one with conservative growth, one at 0% growth, and one with DRIP
+            switched off. The gap between them shows how much the result depends on each assumption. If you&apos;re new
+            to dividends, start with the <Link href="/dividend-guides/dividend-yield">dividend yield guide</Link>, then{" "}
+            <Link href="/dividend-guides/dividend-growth">dividend growth</Link>. For decisions about your own money,
+            consider speaking with a qualified financial professional.
+          </p>
+          <p className="flex items-center gap-1">
+            <a href="#main" className="inline-flex items-center gap-1">
+              Back to the calculator <ArrowRight className="h-4 w-4 -rotate-90" aria-hidden="true" />
+            </a>
+          </p>
+        </article>
+      </div>
+    </>
   );
 }

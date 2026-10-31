@@ -1,13 +1,20 @@
-import type { Metadata } from "next";
-import { Newsreader, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Newsreader, IBM_Plex_Sans } from "next/font/google";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import CookieConsent from "@/components/cookies/CookieConsent";
+import JsonLd from "@/components/JsonLd";
+import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
+// next/font self-hosts these files at build time; no request goes to Google at runtime.
 const newsreader = Newsreader({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+  weight: ["500"],
   variable: "--font-newsreader",
   display: "swap",
+  // Next 14 has no fallback metrics for Newsreader; the CSS stack falls back to Georgia.
+  adjustFontFallback: false,
 });
 
 const plexSans = IBM_Plex_Sans({
@@ -17,43 +24,46 @@ const plexSans = IBM_Plex_Sans({
   display: "swap",
 });
 
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-plex-mono",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "Dividend Calculator — Project Dividend Income & Reinvestment Growth",
-  description:
-    "Free dividend calculator. Estimate future dividend income, portfolio growth, and the compounding effect of dividend reinvestment (DRIP) over time.",
-  keywords: [
-    "dividend calculator",
-    "dividend reinvestment calculator",
-    "DRIP calculator",
-    "dividend income calculator",
-    "dividend growth calculator",
-  ],
-  openGraph: {
-    title: "Dividend Calculator — Project Dividend Income & Reinvestment Growth",
-    description:
-      "Estimate future dividend income and portfolio growth with reinvestment, contributions, and dividend growth rate.",
-    type: "website",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
   },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  formatDetection: { telephone: false },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const viewport: Viewport = {
+  themeColor: "#F8F7F4",
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteConfig.name,
+  url: siteConfig.url,
+  inLanguage: "en-US",
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body
-        className={`${newsreader.variable} ${plexSans.variable} ${plexMono.variable} font-sans antialiased`}
-      >
-        {children}
+    <html lang="en" className={`${newsreader.variable} ${plexSans.variable}`}>
+      <body className="flex min-h-screen flex-col font-sans antialiased">
+        <a
+          href="#main"
+          className="sr-only z-50 rounded-md bg-accent px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        >
+          Skip to content
+        </a>
+        <Header />
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <Footer />
+        <CookieConsent />
+        <JsonLd data={websiteJsonLd} />
       </body>
     </html>
   );

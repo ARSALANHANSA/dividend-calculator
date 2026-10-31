@@ -7,32 +7,88 @@ html {
 }
 
 body {
-  background-color: #F7F4EC;
-  color: #16231C;
+  background-color: #f8f7f4;
+  color: #22211f;
 }
 
 ::selection {
-  background-color: #1F4D3A;
-  color: #F7F4EC;
+  background-color: #3d6b5c;
+  color: #ffffff;
 }
 
-/* visible keyboard focus */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible {
-  outline: 2px solid #B8892F;
+/* Visible keyboard focus on every interactive element */
+:focus-visible {
+  outline: 2px solid #3d6b5c;
   outline-offset: 2px;
 }
 
 @layer components {
-  .input {
-    @apply w-full bg-transparent py-1.5 font-mono text-base text-ink outline-none;
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .card {
+    @apply rounded-xl border border-line bg-surface shadow-[0_1px_2px_rgba(34,33,31,0.04)];
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-white hover:bg-accent-dark;
+  }
+  .btn-secondary {
+    @apply btn border border-line bg-surface text-ink hover:bg-paper;
+  }
+
+  .field-input {
+    @apply w-full rounded-lg border border-line bg-surface px-3 py-2.5 text-base tabular-nums text-ink
+      placeholder:text-muted/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20;
+  }
+  .field-input[aria-invalid="true"] {
+    @apply border-danger focus:border-danger focus:ring-danger/20;
+  }
+
+  .link {
+    @apply text-accent underline decoration-accent/30 underline-offset-2 hover:decoration-accent;
+  }
+
+  /* Long-form content styling, used instead of a typography plugin.
+     :where() keeps specificity low so utility classes still win, and
+     anything inside .not-prose is left alone. */
+  .prose-content {
+    @apply max-w-prose text-[1.0625rem] leading-relaxed text-ink/90;
+  }
+  .prose-content :where(h2):not(:where(.not-prose *)) {
+    @apply mb-4 mt-12 font-display text-2xl font-medium text-ink sm:text-3xl;
+  }
+  .prose-content :where(h3):not(:where(.not-prose *)) {
+    @apply mb-3 mt-8 text-lg font-semibold text-ink;
+  }
+  .prose-content :where(p):not(:where(.not-prose *)) {
+    @apply my-4;
+  }
+  .prose-content :where(ul):not(:where(.not-prose *)) {
+    @apply my-4 list-disc space-y-2 pl-6;
+  }
+  .prose-content :where(ol):not(:where(.not-prose *)) {
+    @apply my-4 list-decimal space-y-2 pl-6;
+  }
+  .prose-content :where(a):not(:where(.not-prose *, .btn-primary)) {
+    @apply text-accent underline decoration-accent/30 underline-offset-2 hover:decoration-accent;
+  }
+  .prose-content :where(strong) {
+    @apply font-semibold text-ink;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
