@@ -1,15 +1,13 @@
 import Link from "next/link";
 import { siteConfig } from "@/lib/site-config";
+import Logo from "@/components/Logo";
 import MobileNav from "./MobileNav";
 
 export default function Header() {
   return (
     <header className="relative border-b border-line bg-surface">
       <div className="container-page flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 font-display text-xl font-medium text-ink">
-          <span aria-hidden="true" className="inline-block h-2.5 w-2.5 rounded-full bg-accent" />
-          {siteConfig.name}
-        </Link>
+        <Logo />
 
         <nav aria-label="Main" className="hidden md:block">
           <ul className="flex items-center gap-1">

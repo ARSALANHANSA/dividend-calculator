@@ -2,15 +2,14 @@ import Link from "next/link";
 import { siteConfig } from "@/lib/site-config";
 import { guides } from "@/data/guides";
 import CookieSettingsButton from "@/components/cookies/CookieSettingsButton";
+import Logo from "@/components/Logo";
 
 export default function Footer() {
   return (
     <footer className="mt-24 border-t border-line bg-surface">
       <div className="container-page grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-2">
-          <Link href="/" className="font-display text-lg font-medium text-ink">
-            {siteConfig.name}
-          </Link>
+          <Logo size="sm" />
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">
             A free, browser-based tool for estimating dividend income and reinvestment growth, with plain-English
             guides to the numbers behind it.
