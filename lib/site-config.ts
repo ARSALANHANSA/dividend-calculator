@@ -13,6 +13,8 @@ export const siteConfig = {
   // TODO(owner): add the real contact address before launch. While this is
   // null the contact page explains that an address has not been published yet.
   contactEmail: null as string | null,
+  // Google Search Console ownership token (public by design).
+  googleSiteVerification: "28hWSdkSRnHyaAx7EjMfjosdquDuMwRrVFOUm4ckweg",
   // Date the content was last reviewed. Update when guides are revised.
   lastReviewed: "2026-11-01",
   mainNav: [
