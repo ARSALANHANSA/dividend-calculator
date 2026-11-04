@@ -32,8 +32,8 @@ variables are needed. The canonical domain lives in `lib/site-config.ts`, not in
 
 ## Before launch: owner checklist
 
-1. **Contact email**: set `contactEmail` in `lib/site-config.ts`. Until then, the contact page says that no
-   address has been published yet.
+1. **Contact email**: set via `contactEmail` in `lib/site-config.ts`. Set it to `null` to hide it; the contact
+   page then says that no address has been published yet.
 2. **Legal review**: have the Privacy Policy, Terms, and Disclaimer reviewed for your jurisdiction, including
    the governing law and liability sections. Confirm your hosting provider's logging practices, which the
    Privacy Policy mentions.
