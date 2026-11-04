@@ -10,9 +10,9 @@ export const siteConfig = {
   language: "en",
   description:
     "Free dividend calculator for estimating dividend income, DRIP reinvestment growth, and yield on cost. Runs entirely in your browser.",
-  // TODO(owner): add the real contact address before launch. While this is
-  // null the contact page explains that an address has not been published yet.
-  contactEmail: null as string | null,
+  // Public contact address shown on the contact and legal pages. Set to null
+  // to hide it; the contact page then says no address has been published.
+  contactEmail: "arsalooa@gmail.com" as string | null,
   // Google Search Console ownership token (public by design).
   googleSiteVerification: "28hWSdkSRnHyaAx7EjMfjosdquDuMwRrVFOUm4ckweg",
   // Date the content was last reviewed. Update when guides are revised.
