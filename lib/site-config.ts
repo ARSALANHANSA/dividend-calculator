@@ -5,7 +5,7 @@ export type NavLink = { href: string; label: string };
 
 export const siteConfig = {
   name: "Dividend Calculator",
-  url: "https://dividend-calculator.pro",
+  url: "https://www.dividend-calculator.pro",
   locale: "en_US",
   language: "en",
   description:
