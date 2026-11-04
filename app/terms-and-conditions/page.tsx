@@ -98,8 +98,8 @@ export default function TermsPage() {
 
       <h2>12. Governing law</h2>
       <p>
-        These terms are governed by the laws that apply where the site operator is based, without regard to
-        conflict-of-law rules, unless the law where you live requires otherwise.
+        These terms are governed by the laws of Pakistan, without regard to conflict-of-law rules. This doesn&apos;t
+        remove any protection you have under the mandatory laws of the country where you live.
       </p>
 
       <h2>13. Contact</h2>
