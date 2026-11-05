@@ -1,6 +1,6 @@
 # Dividend Calculator
 
-Source for **https://www.dividend-calculator.pro**: a free, browser-based dividend calculator with supporting
+Source for **https://dividend-calculator.pro**: a free, browser-based dividend calculator with supporting
 dividend guides, legal pages, cookie consent, and technical SEO.
 
 - Next.js 14 (App Router), TypeScript, Tailwind CSS, lucide-react icons
@@ -39,9 +39,9 @@ variables are needed. The canonical domain lives in `lib/site-config.ts`, not in
    Privacy Policy mentions.
 3. **Content review date**: update `lastReviewed` in `lib/site-config.ts` whenever guides are revised. It
    feeds the "Last reviewed" dates, the sitemap, and the Article structured data.
-4. **Domain redirect**: at your host, 301-redirect `dividend-calculator.pro` to `www.dividend-calculator.pro`
+4. **Domain redirect**: at your host, 301/308-redirect `www.dividend-calculator.pro` to `dividend-calculator.pro`
    (the canonical domain set in `lib/site-config.ts`).
-5. Submit `https://www.dividend-calculator.pro/sitemap.xml` in Google Search Console.
+5. Submit `https://dividend-calculator.pro/sitemap.xml` in Google Search Console.
 
 ## Project structure
 
