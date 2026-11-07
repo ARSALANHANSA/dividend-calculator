@@ -6,7 +6,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Dividend Guides: Yield, DRIP, Growth, Taxes and More",
   description:
-    "Beginner-friendly guides to dividend yield, dividend reinvestment (DRIP), dividend growth, payout frequency, payout ratio, ex-dividend dates, and US dividend taxes.",
+    "Plain-English guides to dividend yield, DRIP, dividend growth, payout ratio, ex-dividend dates, dividend taxes, and JEPQ and VYM dividends.",
   path: "/dividend-guides",
   absoluteTitle: true,
 });

@@ -226,7 +226,9 @@ export default function HomePage() {
             Try a few versions of your own scenario: one with conservative growth, one at 0% growth, and one with DRIP
             switched off. The gap between them shows how much the result depends on each assumption. If you&apos;re new
             to dividends, start with the <Link href="/dividend-guides/dividend-yield">dividend yield guide</Link>, then{" "}
-            <Link href="/dividend-guides/dividend-growth">dividend growth</Link>. For decisions about your own money,
+            <Link href="/dividend-guides/dividend-growth">dividend growth</Link>. Estimating income from a fund? See
+            the <Link href="/dividend-guides/jepq-dividend">JEPQ dividend</Link> and{" "}
+            <Link href="/dividend-guides/vym-dividend">VYM dividend</Link> guides. For decisions about your own money,
             consider speaking with a qualified financial professional.
           </p>
           <p className="flex items-center gap-1">

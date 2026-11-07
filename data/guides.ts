@@ -13,7 +13,17 @@ const SOURCES = {
   irsTopic409: { label: "IRS Topic No. 409, Capital Gains and Losses", url: "https://www.irs.gov/taxtopics/tc409" },
   irsTopic559: { label: "IRS Topic No. 559, Net Investment Income Tax", url: "https://www.irs.gov/taxtopics/tc559" },
   irs1099Div: { label: "IRS: About Form 1099-DIV, Dividends and Distributions", url: "https://www.irs.gov/forms-pubs/about-form-1099-div" },
+  jpmJepq: {
+    label: "J.P. Morgan Asset Management: JPMorgan Nasdaq Equity Premium Income ETF (JEPQ)",
+    url: "https://am.jpmorgan.com/us/en/asset-management/adv/products/jpmorgan-nasdaq-equity-premium-income-etf-etf-shares-46654q203",
+  },
+  vanguardVym: { label: "Vanguard: Vanguard High Dividend Yield ETF (VYM)", url: "https://investor.vanguard.com/investment-products/etfs/profile/vym" },
 } satisfies Record<string, Source>;
+
+// Fund pages state only stable facts (structure, payout schedule). Yields and
+// payment amounts change, so readers are sent to the fund's own page for them.
+const FUND_EXAMPLES_NOTE =
+  "These examples use hypothetical round numbers, not the fund's actual price or distributions. Check the fund's official page for current figures before entering them. Dividend Calculator isn't affiliated with J.P. Morgan or Vanguard, and this page isn't a recommendation to buy or sell any fund.";
 
 export const guides: Guide[] = [
   {
@@ -671,6 +681,228 @@ export const guides: Guide[] = [
     ],
     related: ["dividend-taxes", "payout-frequency", "payout-ratio"],
     sources: [SOURCES.investorExDate, SOURCES.irsPub550],
+  },
+  {
+    slug: "jepq-dividend",
+    shortTitle: "JEPQ Dividend",
+    title: "JEPQ Dividend: How JEPQ's Monthly Distributions Work",
+    metaTitle: "JEPQ Dividend Calculator: Monthly Income and DRIP Estimates",
+    metaDescription:
+      "How the JEPQ dividend works: why JEPQ pays monthly, why the amount changes, how its income is taxed, and how to estimate your own JEPQ income with DRIP.",
+    summary: "Why JEPQ pays every month, why the payment changes, and how to estimate your income from it.",
+    definition:
+      "JEPQ is the ticker for the JPMorgan Nasdaq Equity Premium Income ETF, an actively managed fund that holds stocks drawn mainly from the Nasdaq-100 and sells call options, largely through equity-linked notes (ELNs), to generate income. It pays a distribution every month, and the amount changes from month to month.",
+    formula: [
+      { label: "Annual JEPQ income", expression: "Annual income ≈ Shares owned × Sum of the last 12 monthly distributions per share" },
+      { label: "Trailing distribution yield", expression: "Yield (%) = Last 12 months of distributions per share ÷ Share price × 100" },
+      { label: "Average monthly income", expression: "Monthly income ≈ Annual income ÷ 12" },
+    ],
+    sections: [
+      {
+        heading: "Where the JEPQ dividend comes from",
+        paragraphs: [
+          "Most of JEPQ's income doesn't come from company dividends. Many Nasdaq-100 companies pay small dividends or none at all. Instead, the fund earns option premiums by selling call options tied to the Nasdaq-100, mostly through equity-linked notes issued by banks. It pays that income out to shareholders each month along with the dividends from its stocks.",
+          "Selling call options is a trade-off. The fund collects premium income, but it gives up part of the gains when the Nasdaq-100 rises strongly. In a fast-rising market JEPQ will usually lag the index; in a flat or choppy market the premiums can make up a larger share of its return.",
+        ],
+      },
+      {
+        heading: "Why the monthly payment changes",
+        paragraphs: [
+          "Option premiums depend on market volatility. When markets are volatile, options are priced higher and the fund tends to collect more; when markets are calm, premiums shrink. So JEPQ's monthly distribution rises and falls, and no particular amount is guaranteed.",
+          "For planning, it's more realistic to use the total of the last 12 monthly payments than to multiply the latest month by 12. A single high or low month can make the forward yield look very different from what the fund paid over a full year.",
+        ],
+      },
+      {
+        heading: "How JEPQ distributions are taxed",
+        paragraphs: [
+          "In a US taxable account, income from options and equity-linked notes generally doesn't count as qualified dividends, so a large part of JEPQ's distribution may be taxed at ordinary income rates rather than the lower qualified-dividend rates. The exact split changes each year and is reported on your Form 1099-DIV.",
+          "Reinvested distributions are taxed the same way as cash ones. In a tax-advantaged account such as an IRA, distributions aren't taxed when paid. Investors outside the US may face withholding tax on US fund distributions; the rate depends on your country and any tax treaty.",
+        ],
+      },
+      {
+        heading: "How to estimate JEPQ income with the calculator",
+        bullets: [
+          "Find the current share price and the last 12 months of distributions on the fund's official page or your brokerage.",
+          "Enter your shares or investment amount and the share price.",
+          "Choose \"Dividend per share\" and enter the 12-month total, or enter the trailing yield instead.",
+          "Set the payout frequency to Monthly.",
+          "Use a dividend growth rate of 0% as a neutral starting point. JEPQ's payments aren't designed to grow every year the way some company dividends are.",
+          "Consider a share price growth rate at or below 0% for a cautious estimate, since the option strategy limits upside.",
+          "Enter your tax rate, and switch DRIP on or off to compare reinvesting with taking the cash.",
+        ],
+      },
+    ],
+    examples: [
+      {
+        title: "Hypothetical example: monthly income from $10,000",
+        steps: [
+          "Assume a share price of $50, so $10,000 buys 200 shares.",
+          "Assume the last 12 monthly distributions added up to $4.50 per share, a trailing yield of $4.50 ÷ $50 = 9%.",
+          "Annual income = 200 × $4.50 = $900 before tax.",
+          "Average monthly income = $900 ÷ 12 = $75. Actual months will be above or below that.",
+        ],
+        result: "About $900 a year, or $75 a month on average, before tax.",
+      },
+      {
+        title: "Hypothetical example: 10 years with and without DRIP",
+        steps: [
+          "Same assumptions: 200 shares at $50 and $4.50 a year per share, paid monthly. Distribution growth and price growth are both 0%, with no tax and no contributions.",
+          "Without DRIP: you keep receiving $900 a year, for $9,000 in total. Your 200 shares are still worth $10,000.",
+          "With DRIP: each monthly payment buys more shares. After 10 years you own about 490 shares, and the final year pays about $2,102.",
+          "Ending value with DRIP is about $24,514, compared with $19,000 ($10,000 in shares plus $9,000 in cash) without it.",
+        ],
+        result: "Reinvesting monthly more than doubles the final year's income in this example, but only if the share price and distribution hold steady.",
+      },
+    ],
+    examplesNote: FUND_EXAMPLES_NOTE,
+    misconceptions: [
+      {
+        myth: "JEPQ's yield is guaranteed income.",
+        reality: "The distribution depends on option premiums and market conditions, and it changes every month. It can fall substantially.",
+      },
+      {
+        myth: "A high yield means JEPQ beats the Nasdaq-100.",
+        reality:
+          "Selling call options caps part of the upside. In strong rising markets JEPQ typically returns less than the index in total, even with its distributions.",
+      },
+      {
+        myth: "JEPQ's distributions are qualified dividends.",
+        reality: "Much of the income comes from options and equity-linked notes, which are generally taxed as ordinary income. Check your Form 1099-DIV.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How often does JEPQ pay dividends?",
+        answer: "Monthly. JEPQ has paid a distribution every month since it launched in 2022. The amount changes from month to month.",
+      },
+      {
+        question: "How much will I earn from JEPQ each month?",
+        answer:
+          "Multiply your shares by the latest monthly distribution per share for a rough figure, or use the 12-month total divided by 12 for a steadier average. Enter your numbers in the calculator with Monthly frequency to project income over time.",
+      },
+      {
+        question: "Where can I find JEPQ's current yield and distribution history?",
+        answer:
+          "On J.P. Morgan Asset Management's official JEPQ page or through your brokerage. This site doesn't show live fund data, so always check a current source before entering numbers.",
+      },
+      {
+        question: "Should I reinvest JEPQ distributions?",
+        answer:
+          "It depends on whether you need the income now. Reinvesting buys more shares and compounds income if the price and distributions hold up. Taking the cash gives steady income to spend. The calculator shows both outcomes side by side.",
+      },
+    ],
+    related: ["vym-dividend", "dividend-reinvestment-drip", "payout-frequency"],
+    sources: [SOURCES.jpmJepq, SOURCES.irs1099Div, SOURCES.irsPub550],
+  },
+  {
+    slug: "vym-dividend",
+    shortTitle: "VYM Dividend",
+    title: "VYM Dividend: How the Vanguard High Dividend Yield ETF Pays",
+    metaTitle: "VYM Dividend Calculator: Quarterly Income and DRIP Growth",
+    metaDescription:
+      "How the VYM dividend works: what Vanguard's High Dividend Yield ETF holds, when it pays, how its dividends are taxed, and how to project your VYM income.",
+    summary: "What VYM holds, when it pays, and how to project VYM income and dividend growth with reinvestment.",
+    definition:
+      "VYM is the ticker for the Vanguard High Dividend Yield ETF, an index fund that aims to track the FTSE High Dividend Yield Index. The index holds US companies forecast to have above-average dividend yields and excludes real estate investment trusts (REITs). VYM pays dividends quarterly.",
+    formula: [
+      { label: "Annual VYM income", expression: "Annual income ≈ Shares owned × Sum of the last 4 quarterly dividends per share" },
+      { label: "Quarterly income", expression: "Quarterly income ≈ Annual income ÷ 4" },
+      { label: "Trailing dividend yield", expression: "Yield (%) = Last 4 quarterly dividends per share ÷ Share price × 100" },
+    ],
+    sections: [
+      {
+        heading: "Where the VYM dividend comes from",
+        paragraphs: [
+          "VYM's dividends are the dividends paid by the companies it holds, collected by the fund and passed on to shareholders after fund expenses. Because the fund tracks an index of higher-yielding US stocks, it holds hundreds of companies, and no single one decides the size of the payment.",
+          "That makes VYM's income more diversified than owning a few dividend stocks, but it isn't fixed. When the companies in the index raise or cut their dividends, VYM's payments follow.",
+        ],
+      },
+      {
+        heading: "When VYM pays and why payments vary",
+        paragraphs: [
+          "VYM pays four times a year. Individual quarterly payments can differ noticeably, because the companies in the fund don't all pay on the same schedule, so dividends arriving within each quarter are uneven.",
+          "Adding up the last four payments gives a better picture of annual income than multiplying a single quarter by four.",
+        ],
+      },
+      {
+        heading: "How VYM dividends are taxed",
+        paragraphs: [
+          "In a US taxable account, dividends from US companies held long enough are often qualified and taxed at lower rates than ordinary income, though some of a fund's distribution can be non-qualified. Your Form 1099-DIV shows the exact split each year.",
+          "Reinvested dividends are taxed the same way as cash ones. Investors outside the US may face withholding tax on dividends from US funds; the rate depends on your country and any tax treaty.",
+        ],
+      },
+      {
+        heading: "How to estimate VYM income with the calculator",
+        bullets: [
+          "Find the current share price and the last four quarterly dividends on Vanguard's official page or your brokerage.",
+          "Enter your shares or investment amount and the share price.",
+          "Choose \"Dividend per share\" and enter the four-quarter total, or enter the trailing yield.",
+          "Set the payout frequency to Quarterly.",
+          "Pick a dividend growth rate you think is realistic. Looking at how much the annual total has changed over several years is a reasonable guide; use a lower number for a cautious estimate.",
+          "Add your tax rate and any regular contributions, then compare results with DRIP on and off.",
+        ],
+      },
+    ],
+    examples: [
+      {
+        title: "Hypothetical example: quarterly income from $10,000",
+        steps: [
+          "Assume a share price of $125, so $10,000 buys 80 shares.",
+          "Assume the last four quarterly dividends added up to $3.50 per share, a trailing yield of $3.50 ÷ $125 = 2.8%.",
+          "Annual income = 80 × $3.50 = $280 before tax.",
+          "Quarterly income ≈ $280 ÷ 4 = $70.",
+        ],
+        result: "About $280 a year, or $70 a quarter on average, before tax.",
+      },
+      {
+        title: "Hypothetical example: 20 years of dividend growth and DRIP",
+        steps: [
+          "Same starting point: 80 shares at $125 and $3.50 a year per share, paid quarterly. Assume dividends grow 6% a year, the share price stays flat, and there is no tax and no contributions.",
+          "Without DRIP: income grows only from dividend increases, reaching about $847 in year 20. Total dividends received are about $10,300.",
+          "With DRIP: reinvesting adds shares as well. You end with about 222 shares, and year 20 pays about $2,236.",
+          "Ending value with DRIP is about $27,807, compared with about $20,300 ($10,000 in shares plus $10,300 in cash) without it.",
+        ],
+        result: "Dividend growth and reinvestment together raise yearly income from $280 to about $2,236 in this example.",
+      },
+    ],
+    examplesNote: FUND_EXAMPLES_NOTE,
+    misconceptions: [
+      {
+        myth: "VYM pays the same amount every quarter.",
+        reality: "Quarterly payments vary with the timing and size of the dividends paid by the companies in the fund.",
+      },
+      {
+        myth: "A high-dividend fund can't lose value.",
+        reality: "VYM's share price moves with the stock market. Dividends add to the return, but the value of your holding can still fall.",
+      },
+      {
+        myth: "VYM's dividend always goes up.",
+        reality: "Its payments depend on the companies in the index. If they cut dividends, as happens in recessions, VYM's income can fall.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How often does VYM pay dividends?",
+        answer: "Quarterly, four times a year. The amount varies from quarter to quarter.",
+      },
+      {
+        question: "How much will I earn from VYM?",
+        answer:
+          "Multiply your shares by the total of the last four quarterly dividends per share for a rough annual figure. To project growth and reinvestment over time, enter your numbers in the calculator with Quarterly frequency.",
+      },
+      {
+        question: "Where can I find VYM's current yield and dividend history?",
+        answer:
+          "On Vanguard's official VYM page or through your brokerage. This site doesn't show live fund data, so check a current source before entering numbers.",
+      },
+      {
+        question: "What's the difference between VYM and JEPQ?",
+        answer:
+          "VYM passes on dividends from a broad index of higher-yielding US stocks and pays quarterly. JEPQ generates most of its income by selling options on the Nasdaq-100 and pays monthly, usually at a higher but more variable rate, with more of it taxed as ordinary income.",
+      },
+    ],
+    related: ["jepq-dividend", "dividend-growth", "dividend-yield"],
+    sources: [SOURCES.vanguardVym, SOURCES.irs1099Div, SOURCES.irsTopic404],
   },
 ];
 

@@ -16,7 +16,7 @@ export const siteConfig = {
   // Google Search Console ownership token (public by design).
   googleSiteVerification: "28hWSdkSRnHyaAx7EjMfjosdquDuMwRrVFOUm4ckweg",
   // Date the content was last reviewed. Update when guides are revised.
-  lastReviewed: "2026-11-01",
+  lastReviewed: "2026-11-08",
   mainNav: [
     { href: "/", label: "Calculator" },
     { href: "/dividend-guides", label: "Dividend Guides" },

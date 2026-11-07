@@ -27,6 +27,8 @@ export type Guide = {
   formula?: { label: string; expression: string; note?: string }[];
   sections: GuideSection[];
   examples: WorkedExample[];
+  /** Replaces the default note under the worked examples. */
+  examplesNote?: string;
   misconceptions: { myth: string; reality: string }[];
   faqs: Faq[];
   related: string[];

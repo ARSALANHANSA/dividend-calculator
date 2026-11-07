@@ -31,6 +31,11 @@ export const homeFaqs: Faq[] = [
     question: "Can I model a dividend cut or a falling share price?",
     answer: "Yes. Enter a negative dividend growth rate to model a shrinking dividend, or a negative share price growth rate to model declining prices.",
   },
+  {
+    question: "Can I use this as a JEPQ or VYM dividend calculator?",
+    answer:
+      "Yes. Enter the fund's current share price and its last 12 months of distributions per share (or its yield). Choose Monthly for JEPQ or Quarterly for VYM. Our JEPQ dividend and VYM dividend guides explain how each fund pays and what to enter.",
+  },
 ];
 
 /** Broader questions for the /faq page. Kept distinct from homeFaqs to avoid duplication. */
@@ -67,7 +72,7 @@ export const siteFaqs: Faq[] = [
   {
     question: "Can I use the calculator for ETFs and mutual funds?",
     answer:
-      "Yes, as long as you enter the fund's distribution per share or yield and a share price. Fund distributions can include capital gains and return of capital, and they often vary more than company dividends, so test several scenarios.",
+      "Yes, as long as you enter the fund's distribution per share or yield and a share price. This works for ETFs such as JEPQ (monthly) and VYM (quarterly). Fund distributions can include capital gains and return of capital, and they often vary more than company dividends, so test several scenarios.",
   },
   {
     question: "Who writes the guides?",

@@ -120,7 +120,8 @@ export default function GuidePage({ params }: Props) {
             </div>
           ))}
           <p className="text-sm text-muted">
-            Examples are hypothetical and use round numbers for illustration. They do not describe any real security.
+            {guide.examplesNote ??
+              "Examples are hypothetical and use round numbers for illustration. They do not describe any real security."}
           </p>
 
           <h2>Common misconceptions</h2>
