@@ -28,10 +28,15 @@ function calculate(values: CalculatorFormValues) {
   return { result };
 }
 
-const initialResult = calculate(DEFAULT_FORM_VALUES).result!;
+type Props = {
+  /** Overrides for the example values, e.g. a fund's payout frequency. Reset returns to these. */
+  defaults?: Partial<CalculatorFormValues>;
+};
 
-export default function DividendCalculator() {
-  const [values, setValues] = useState<CalculatorFormValues>(DEFAULT_FORM_VALUES);
+export default function DividendCalculator({ defaults }: Props) {
+  const [startValues] = useState<CalculatorFormValues>(() => ({ ...DEFAULT_FORM_VALUES, ...defaults }));
+  const [initialResult] = useState(() => calculate(startValues).result!);
+  const [values, setValues] = useState<CalculatorFormValues>(startValues);
   const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});
   const [result, setResult] = useState<Result>(initialResult);
   const [stale, setStale] = useState(false);
@@ -70,7 +75,7 @@ export default function DividendCalculator() {
   };
 
   const onReset = () => {
-    setValues(DEFAULT_FORM_VALUES);
+    setValues(startValues);
     setErrors({});
     setResult(initialResult);
     setStale(false);

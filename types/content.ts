@@ -1,3 +1,5 @@
+import type { CalculatorFormValues } from "@/lib/validation";
+
 export type Faq = { question: string; answer: string };
 
 export type Source = { label: string; url: string };
@@ -33,4 +35,12 @@ export type Guide = {
   faqs: Faq[];
   related: string[];
   sources: Source[];
+  /** Shows the calculator at the top of the page, preset for this topic. */
+  calculator?: {
+    heading: string;
+    intro: string;
+    /** Where readers find current figures to enter. */
+    dataSource: Source;
+    defaults: Partial<CalculatorFormValues>;
+  };
 };

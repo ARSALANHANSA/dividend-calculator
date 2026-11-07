@@ -684,12 +684,33 @@ export const guides: Guide[] = [
   },
   {
     slug: "jepq-dividend",
-    shortTitle: "JEPQ Dividend",
-    title: "JEPQ Dividend: How JEPQ's Monthly Distributions Work",
+    shortTitle: "JEPQ Dividend Calculator",
+    title: "JEPQ Dividend Calculator",
     metaTitle: "JEPQ Dividend Calculator: Monthly Income and DRIP Estimates",
     metaDescription:
       "How the JEPQ dividend works: why JEPQ pays monthly, why the amount changes, how its income is taxed, and how to estimate your own JEPQ income with DRIP.",
-    summary: "Why JEPQ pays every month, why the payment changes, and how to estimate your income from it.",
+    summary:
+      "Estimate your monthly JEPQ income, total distributions, and growth with reinvestment. Below the calculator: why JEPQ pays every month and why the payment changes.",
+    calculator: {
+      heading: "Calculate your JEPQ dividend income",
+      intro:
+        "The calculator is set to monthly payouts with 0% distribution growth. The price and distribution below are round example numbers, not JEPQ's actual figures. Replace them with the current share price and the total of the last 12 monthly distributions per share.",
+      dataSource: SOURCES.jpmJepq,
+      defaults: {
+        holdingMode: "amount",
+        initialInvestment: "10000",
+        sharePrice: "50",
+        dividendMode: "perShare",
+        dividendPerShare: "4.50",
+        payoutFrequency: "12",
+        dividendGrowthRate: "0",
+        priceGrowthRate: "0",
+        contributionAmount: "0",
+        years: "10",
+        reinvestDividends: true,
+        taxRate: "0",
+      },
+    },
     definition:
       "JEPQ is the ticker for the JPMorgan Nasdaq Equity Premium Income ETF, an actively managed fund that holds stocks drawn mainly from the Nasdaq-100 and sells call options, largely through equity-linked notes (ELNs), to generate income. It pays a distribution every month, and the amount changes from month to month.",
     formula: [
@@ -796,12 +817,33 @@ export const guides: Guide[] = [
   },
   {
     slug: "vym-dividend",
-    shortTitle: "VYM Dividend",
-    title: "VYM Dividend: How the Vanguard High Dividend Yield ETF Pays",
+    shortTitle: "VYM Dividend Calculator",
+    title: "VYM Dividend Calculator",
     metaTitle: "VYM Dividend Calculator: Quarterly Income and DRIP Growth",
     metaDescription:
       "How the VYM dividend works: what Vanguard's High Dividend Yield ETF holds, when it pays, how its dividends are taxed, and how to project your VYM income.",
-    summary: "What VYM holds, when it pays, and how to project VYM income and dividend growth with reinvestment.",
+    summary:
+      "Estimate your quarterly VYM income and how dividend growth and reinvestment could build it over time. Below the calculator: what VYM holds and how it pays.",
+    calculator: {
+      heading: "Calculate your VYM dividend income",
+      intro:
+        "The calculator is set to quarterly payouts. The price, dividend, and 6% dividend growth below are round example numbers, not VYM's actual figures. Replace them with the current share price, the total of the last four quarterly dividends per share, and your own growth assumption.",
+      dataSource: SOURCES.vanguardVym,
+      defaults: {
+        holdingMode: "amount",
+        initialInvestment: "10000",
+        sharePrice: "125",
+        dividendMode: "perShare",
+        dividendPerShare: "3.50",
+        payoutFrequency: "4",
+        dividendGrowthRate: "6",
+        priceGrowthRate: "0",
+        contributionAmount: "0",
+        years: "20",
+        reinvestDividends: true,
+        taxRate: "0",
+      },
+    },
     definition:
       "VYM is the ticker for the Vanguard High Dividend Yield ETF, an index fund that aims to track the FTSE High Dividend Yield Index. The index holds US companies forecast to have above-average dividend yields and excludes real estate investment trusts (REITs). VYM pays dividends quarterly.",
     formula: [

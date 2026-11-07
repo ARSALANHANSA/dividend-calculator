@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Calculator } from "lucide-react";
+import { ArrowRight, ArrowUp, Calculator } from "lucide-react";
+import DividendCalculator from "@/components/calculator/DividendCalculator";
 import FaqList from "@/components/FaqList";
 import JsonLd from "@/components/JsonLd";
 import PageHeader from "@/components/PageHeader";
@@ -54,9 +55,24 @@ export default function GuidePage({ params }: Props) {
     publisher: publisherJsonLd,
   };
 
+  const appJsonLd = guide.calculator && {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: guide.title,
+    url: absoluteUrl(path),
+    applicationCategory: "FinanceApplication",
+    operatingSystem: "Any (web browser)",
+    browserRequirements: "Requires JavaScript",
+    isAccessibleForFree: true,
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    description: guide.metaDescription,
+    publisher: publisherJsonLd,
+  };
+
   return (
     <>
       <JsonLd data={articleJsonLd} />
+      {appJsonLd && <JsonLd data={appJsonLd} />}
       <PageHeader
         title={guide.title}
         intro={guide.summary}
@@ -67,6 +83,24 @@ export default function GuidePage({ params }: Props) {
         ]}
         meta={<>Last reviewed {reviewed} · General education, not financial or tax advice</>}
       />
+
+      {guide.calculator && (
+        <section id="calculator" aria-labelledby="calculator-heading" className="container-page scroll-mt-4 pt-8">
+          <h2 id="calculator-heading" className="font-display text-2xl font-medium text-ink">
+            {guide.calculator.heading}
+          </h2>
+          <p className="mt-2 max-w-3xl leading-relaxed text-muted">
+            {guide.calculator.intro} Find current figures on the{" "}
+            <a href={guide.calculator.dataSource.url} rel="noopener" target="_blank" className="link">
+              official fund page
+            </a>
+            .
+          </p>
+          <div className="mt-6">
+            <DividendCalculator defaults={guide.calculator.defaults} />
+          </div>
+        </section>
+      )}
 
       <div className="container-page grid grid-cols-1 gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <article className="prose-content">
@@ -135,10 +169,17 @@ export default function GuidePage({ params }: Props) {
 
           <div className="my-10 flex flex-col items-start gap-3 rounded-xl border border-accent/30 bg-accent-soft p-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="!my-0 text-base">Run your own numbers with these assumptions.</p>
-            <Link href="/" className="btn-primary !text-white !no-underline">
-              <Calculator className="h-4 w-4" aria-hidden="true" />
-              Use the Dividend Calculator
-            </Link>
+            {guide.calculator ? (
+              <a href="#calculator" className="btn-primary !text-white !no-underline">
+                <ArrowUp className="h-4 w-4" aria-hidden="true" />
+                Back to the calculator
+              </a>
+            ) : (
+              <Link href="/" className="btn-primary !text-white !no-underline">
+                <Calculator className="h-4 w-4" aria-hidden="true" />
+                Use the Dividend Calculator
+              </Link>
+            )}
           </div>
 
           <h2>Frequently asked questions</h2>

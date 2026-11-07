@@ -34,7 +34,7 @@ export const homeFaqs: Faq[] = [
   {
     question: "Can I use this as a JEPQ or VYM dividend calculator?",
     answer:
-      "Yes. Enter the fund's current share price and its last 12 months of distributions per share (or its yield). Choose Monthly for JEPQ or Quarterly for VYM. Our JEPQ dividend and VYM dividend guides explain how each fund pays and what to enter.",
+      "Yes. Enter the fund's current share price and its last 12 months of distributions per share (or its yield). Choose Monthly for JEPQ or Quarterly for VYM. The dedicated JEPQ and VYM dividend calculator pages come preset for each fund and explain what to enter.",
   },
 ];
 
