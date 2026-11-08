@@ -228,7 +228,11 @@ export default function HomePage() {
             to dividends, start with the <Link href="/dividend-guides/dividend-yield">dividend yield guide</Link>, then{" "}
             <Link href="/dividend-guides/dividend-growth">dividend growth</Link>. Estimating income from a fund? Try
             the <Link href="/dividend-guides/jepq-dividend">JEPQ dividend calculator</Link> or the{" "}
-            <Link href="/dividend-guides/vym-dividend">VYM dividend calculator</Link>. For decisions about your own money,
+            <Link href="/dividend-guides/vym-dividend">VYM dividend calculator</Link>. Setting an income goal? Read{" "}
+            <Link href="/blog/how-much-to-invest-for-1000-a-month-in-dividends">
+              how much you need to invest to make $1,000 a month in dividends
+            </Link>
+            . For decisions about your own money,
             consider speaking with a qualified financial professional.
           </p>
           <p className="flex items-center gap-1">

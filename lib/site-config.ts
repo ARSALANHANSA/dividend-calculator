@@ -20,6 +20,7 @@ export const siteConfig = {
   mainNav: [
     { href: "/", label: "Calculator" },
     { href: "/dividend-guides", label: "Dividend Guides" },
+    { href: "/blog", label: "Blog" },
     { href: "/faq", label: "FAQ" },
     { href: "/about", label: "About" },
   ] satisfies NavLink[],

@@ -33,6 +33,11 @@ export default function Footer() {
           <h2 className="text-sm font-semibold text-ink">Site</h2>
           <ul className="mt-3 space-y-2 text-sm">
             <li>
+              <Link href="/blog" className="text-muted hover:text-ink">
+                Blog
+              </Link>
+            </li>
+            <li>
               <Link href="/faq" className="text-muted hover:text-ink">
                 FAQ
               </Link>

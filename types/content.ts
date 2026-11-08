@@ -4,6 +4,21 @@ export type Faq = { question: string; answer: string };
 
 export type Source = { label: string; url: string };
 
+export type BlogPost = {
+  slug: string;
+  /** The page H1. */
+  title: string;
+  metaTitle: string;
+  metaDescription: string;
+  /** Shown on the blog index and under the H1. */
+  summary: string;
+  /** ISO dates (YYYY-MM-DD). */
+  published: string;
+  updated: string;
+  readingMinutes: number;
+  faqs: Faq[];
+};
+
 export type GuideSection = {
   heading: string;
   paragraphs?: string[];
