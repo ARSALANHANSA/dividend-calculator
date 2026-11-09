@@ -5,6 +5,9 @@ import { Calculator } from "lucide-react";
 import FaqList from "@/components/FaqList";
 import JsonLd from "@/components/JsonLd";
 import PageHeader from "@/components/PageHeader";
+import HundredThousandDividendIncome, {
+  HundredThousandBottomLine,
+} from "@/components/blog/posts/HundredThousandDividendIncome";
 import ThousandAMonthInDividends, { ThousandAMonthBottomLine } from "@/components/blog/posts/ThousandAMonthInDividends";
 import { formatPostDate, getPost, posts } from "@/data/posts";
 import { buildMetadata, publisherJsonLd } from "@/lib/seo";
@@ -14,6 +17,10 @@ type Props = { params: { slug: string } };
 
 // Body before the FAQs, and an optional closing section after them.
 const bodies: Record<string, { Body: ComponentType; After?: ComponentType }> = {
+  "how-much-dividend-income-does-100000-generate": {
+    Body: HundredThousandDividendIncome,
+    After: HundredThousandBottomLine,
+  },
   "how-much-to-invest-for-1000-a-month-in-dividends": {
     Body: ThousandAMonthInDividends,
     After: ThousandAMonthBottomLine,
@@ -45,6 +52,7 @@ export default function BlogPostPage({ params }: Props) {
   const { Body, After } = content;
 
   const path = `/blog/${post.slug}`;
+  const morePosts = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
   const postJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -115,8 +123,24 @@ export default function BlogPostPage({ params }: Props) {
 
           <p className="text-sm text-muted">
             This article is for educational purposes only and is not investment, financial, or tax advice. Projections
-            are hypothetical and not guaranteed. See our full <Link href="/disclaimer">disclaimer</Link>.
+            are hypothetical and assume constant rates; real dividends and prices change, and dividends can be cut.
+            Consider speaking with a qualified financial professional before making decisions about your own money. See
+            our full <Link href="/disclaimer">disclaimer</Link>.
           </p>
+
+          {morePosts.length > 0 && (
+            <>
+              <h2>More from the blog</h2>
+              <ul>
+                {morePosts.map((p) => (
+                  <li key={p.slug}>
+                    <Link href={`/blog/${p.slug}`}>{p.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+
           <p className="text-sm">
             <Link href="/blog">← All blog posts</Link>
           </p>

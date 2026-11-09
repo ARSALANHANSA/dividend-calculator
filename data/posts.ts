@@ -4,6 +4,50 @@ import type { BlogPost } from "@/types/content";
 // to its slug in app/blog/[slug]/page.tsx.
 export const posts: BlogPost[] = [
   {
+    slug: "how-much-dividend-income-does-100000-generate",
+    title: "How Much Dividend Income Does $100,000 Generate?",
+    metaTitle: "How Much Dividend Income Does $100,000 Generate?",
+    metaDescription:
+      "$100,000 pays about $2,000 to $8,000 a year in dividends. See income at every yield, after-tax figures, and how DRIP grows it over 20 years.",
+    summary:
+      "Income from $100,000 at every common yield, what you keep after taxes, and a 20-year projection with and without reinvestment.",
+    published: "2026-11-10",
+    updated: "2026-11-10",
+    readingMinutes: 8,
+    faqs: [
+      {
+        question: "How much does $100,000 in dividend stocks pay per month?",
+        answer:
+          "At a 3% yield, about $250 a month; at 4%, about $333; at 6%, about $500. These are averages. Most stocks pay quarterly, so you'd get larger payments four times a year.",
+      },
+      {
+        question: "Can you live off dividends from $100,000?",
+        answer:
+          "Not on its own for most people. At a 4% yield it pays $4,000 a year. It can cover a specific bill, such as a phone plan or utilities, and it grows if you keep reinvesting and adding money.",
+      },
+      {
+        question: "How much do I need to invest to make $1,000 a month?",
+        answer:
+          "About $300,000 at a 4% yield, or $240,000 at 5%, before taxes. We break it down by yield and timeline in how much to invest for $1,000 a month in dividends.",
+      },
+      {
+        question: "Is it better to take the cash or reinvest?",
+        answer:
+          "If you don't need the income yet, reinvesting usually builds far more income over time, as the 20-year table above shows. If you need the money now, taking the cash is fine. The calculator shows both outcomes side by side.",
+      },
+      {
+        question: "What does $100,000 in VYM or JEPQ pay?",
+        answer:
+          "It depends on each fund's current yield, which changes over time. Use the preset VYM dividend calculator or JEPQ dividend calculator and enter 100000 as your investment.",
+      },
+      {
+        question: "When do I get paid?",
+        answer:
+          "You must own the shares before the ex-dividend date to receive the next payment. Our ex-dividend date guide explains the four key dates.",
+      },
+    ],
+  },
+  {
     slug: "how-much-to-invest-for-1000-a-month-in-dividends",
     title: "How Much Do You Need to Invest to Make $1,000 a Month in Dividends?",
     metaTitle: "How Much to Invest for $1,000 a Month in Dividends",
